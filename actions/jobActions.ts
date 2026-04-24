@@ -106,6 +106,7 @@ export async function deleteJob(id: string) {
       };
     }
 
+    revalidatePath("/");
     revalidatePath("/dashboard");
 
     return { success: true };
