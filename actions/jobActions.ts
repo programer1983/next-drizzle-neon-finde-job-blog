@@ -56,6 +56,8 @@ export async function createJob(jobData: JobFormData) {
   try {
     await db.insert(jobsTable).values({ ...validation.data, userId });
     revalidatePath("/");
+    revalidatePath("/jobs");
+    revalidatePath("/dashboard");
     return { success: true };
   } catch (error) {
     console.log(error);

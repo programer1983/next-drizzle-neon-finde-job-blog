@@ -2,6 +2,8 @@ import { Job } from "@/lib/schema";
 import JobCard from "../job/JobCard";
 import { getJobs } from "@/actions/jobActions";
 
+export const dynamic = "force-dynamic";
+
 export default async function JobFeed() {
   const jobs = await getJobs();
 
