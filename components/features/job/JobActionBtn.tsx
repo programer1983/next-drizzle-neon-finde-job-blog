@@ -38,12 +38,12 @@ export default function JobActionBtn({
 
       if (response.success) {
         toast.success("Job deleted successfully.");
-        setOpen(false)
+        setOpen(false);
       } else {
         toast.error(response.error || "Failed to delete job.");
       }
     } catch (error) {
-      console.log("Delete Failed");
+      console.log("Delete Failed: ", error);
       toast.error("Unexpected error. Please try again.");
     } finally {
       setIsDeleting(false);

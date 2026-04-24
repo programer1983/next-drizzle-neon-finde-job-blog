@@ -12,7 +12,7 @@ export default async function UserJobList() {
 
       {myJobs.length === 0 ? (
         <div className="rounded-lg border p-6 text-muted-foreground text-center">
-          <div>You haven't posted any job yet.</div>
+          <div>You haven&apos;t posted any job yet.</div>
           <Link className="text-primary underline" href="/post-job">
             {" "}
             Post You First Post
