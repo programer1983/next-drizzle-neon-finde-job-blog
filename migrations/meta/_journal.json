@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1776756579575,
+      "tag": "0000_steep_vapor",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1776760858648,
+      "tag": "0001_overjoyed_vermin",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1776944205784,
+      "tag": "0002_big_mac_gargan",
+      "breakpoints": true
+    }
+  ]
+}
