@@ -10,7 +10,12 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { InputGroup, InputGroupTextarea } from "@/components/ui/input-group";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/components/ui/input-group";
 import { jobFormSchema, JobFormValues } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -202,9 +207,31 @@ export default function EditJobForm({ job }: EditJobFormPost) {
                       rows={8}
                       className="min-h-24 resize-none"
                     />
+                    <InputGroupAddon align="block-end">
+                      <InputGroupText className="tabular-nums">
+                        {field.value.length}/50 characters
+                      </InputGroupText>
+                    </InputGroupAddon>
                   </InputGroup>
                   <FieldDescription>
                     Provide a comprehensine description of the position.
+                  </FieldDescription>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+            <Controller
+              name="applicationUrl"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel>Application Url</FieldLabel>
+                  <Input {...field} placeholder="https://example.com/apply" />
+                  <FieldDescription>
+                    Where should candidates apply for this position?.
                   </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />

@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Job } from "@/lib/schema";
+import { auth } from "@clerk/nextjs/server";
 import { Briefcase, ExternalLink, MapPin } from "lucide-react";
 import { Span } from "next/dist/trace";
 import Link from "next/link";
@@ -9,7 +10,8 @@ interface JobDetailHeaderProps {
   job: Job | null;
 }
 
-export default function JobDeatailsHeader({ job }: JobDetailHeaderProps) {
+export default async function JobDeatailsHeader({ job }: JobDetailHeaderProps) {
+  const { userId } = await auth();
   return (
     <div className="border-b bg-muted/30 py-12 px-3">
       <div className="flex justify-between">
@@ -50,12 +52,14 @@ export default function JobDeatailsHeader({ job }: JobDetailHeaderProps) {
           </div>
         </div>
         <div>
-          <Button asChild>
-            <Link href={job?.applicationUrl || ""}>
-              Apply Now
-              <ExternalLink className="w-4 h-4" />
-            </Link>
-          </Button>
+          {userId && job?.applicationUrl && (
+            <Button asChild>
+              <Link href={job?.applicationUrl || ""}>
+                Apply Now
+                <ExternalLink className="w-4 h-4" />
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>
