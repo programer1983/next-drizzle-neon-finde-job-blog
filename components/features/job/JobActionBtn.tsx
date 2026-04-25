@@ -12,7 +12,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useAuth } from "@clerk/nextjs";
-import { Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -52,6 +53,11 @@ export default function JobActionBtn({
 
   return (
     <div className="absolute  top-2 right-2">
+      <Button variant={"outline"} asChild className="cursor-pointer mr-2">
+        <Link href={`/jobs/${jobId}/edit`}>
+          <Pencil className="w-5 h-5" />
+        </Link>
+      </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" className="cursor-pointer" size="icon">

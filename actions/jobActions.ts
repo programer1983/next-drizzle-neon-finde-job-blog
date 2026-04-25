@@ -11,6 +11,8 @@ import { success } from "zod";
 
 type JobFormData = Omit<NewJob, "userId" | "id" | "postedAt">;
 
+/* ======= GET ALL JOBS ================================================================================== */
+
 export async function getJobs() {
   try {
     const jobs = await db
@@ -25,6 +27,7 @@ export async function getJobs() {
   }
 }
 
+/* ======= GET SINGLE JOB ================================================================================== */
 export async function getSingleJob(id: string) {
   try {
     const [job] = await db
@@ -40,6 +43,7 @@ export async function getSingleJob(id: string) {
   }
 }
 
+/* ======= CREATE JOB ================================================================================== */
 export async function createJob(jobData: JobFormData) {
   const { userId } = await auth();
 
@@ -65,6 +69,7 @@ export async function createJob(jobData: JobFormData) {
   }
 }
 
+/* ======= GET MY JOBS ================================================================================== */
 export async function getMyJobs() {
   const { userId } = await auth();
 
@@ -86,6 +91,7 @@ export async function getMyJobs() {
   }
 }
 
+/* ======= DELETE JOB ================================================================================== */
 export async function deleteJob(id: string) {
   const authData = await auth();
   const userId = authData.userId;
@@ -113,5 +119,44 @@ export async function deleteJob(id: string) {
   } catch (error) {
     console.log(error);
     return { success: false, error: "Failed to delete the job" };
+  }
+}
+
+/* ======= UPDATE JOB ================================================================================== */
+export async function updateJob(id: string, jobData: JobFormData) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return { success: false, error: "Unauthorized" };
+  }
+
+  const validation = jobFormSchema.safeParse(jobData);
+
+  if (!validation.success) {
+    return { success: false, error: "Invalid form data" };
+  }
+
+  try {
+    const result = await db
+      .update(jobsTable)
+      .set(validation.data)
+      .where(and(eq(jobsTable.id, id), eq(jobsTable.userId, userId)));
+
+    if (result.rowCount === 0) {
+      return {
+        success: false,
+        error: "Job not found or you lack permission to update it.",
+      };
+    }
+
+    revalidatePath("/");
+    revalidatePath("/jobs");
+    revalidatePath("/dashboard");
+    revalidatePath(`/job/${id}`);
+
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Failed to update the job" };
   }
 }
