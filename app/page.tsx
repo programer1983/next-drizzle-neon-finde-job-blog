@@ -10,7 +10,9 @@ export default async function Home() {
       <section>
         <Container>
           <div className="mb-6">
-            <h2 className="text-[30px] font-semibold">Latest Opportunities</h2>
+            <h2 className="text-[23px] sm:text-[30px] font-semibold">
+              Latest Opportunities
+            </h2>
           </div>
           <JobFeed />
         </Container>

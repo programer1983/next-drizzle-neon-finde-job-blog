@@ -51,7 +51,7 @@ export default async function JobDeatailsHeader({ job }: JobDetailHeaderProps) {
             </span>
           </div>
         </div>
-        <div>
+        <div className="xs:ml-[20px]">
           {userId && job?.applicationUrl && (
             <Button asChild>
               <Link href={job?.applicationUrl || ""}>

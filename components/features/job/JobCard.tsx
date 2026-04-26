@@ -13,18 +13,24 @@ export default function JobCard({ job }: JobCardProps) {
   return (
     <Card className="relative">
       <CardContent>
-        <Link href={`/jobs/${job.id}`}>
-          <div className="flex flex-col gap-4">
-            <div>
-              <h3 className="font-semibold text-lg leading-tight">
-                {job.title}
-              </h3>
+        <div className="flex flex-col gap-4">
+          <div>
+            <div className="flex justify-between gap-x-[10px]">
+              <Link href={`/jobs/${job.id}`}>
+                <h3 className="font-semibold text-lg leading-tight">
+                  {job.title}
+                </h3>
+              </Link>
+              <JobActionBtn jobId={job.id} ownerId={job.userId} />
+            </div>
+            <Link href={`/jobs/${job.id}`}>
               <p className="text-sm text-muted-foreground mt-1">
                 {job.company}
               </p>
-            </div>
-
-            <div className="flex flex-wrap text-muted-foreground items-center gap-3 text-sm">
+            </Link>
+          </div>
+          <Link href={`/jobs/${job.id}`}>
+            <div className="flex flex-wrap text-muted-foreground items-center gap-3 text-sm mb-[20px]">
               <div className="flex items-center gap-1.5">
                 <MapPin className="h-4 w-4" />
                 <span>{job.location}</span>
@@ -49,9 +55,8 @@ export default function JobCard({ job }: JobCardProps) {
                 })}
               </span>
             </div>
-          </div>
-        </Link>
-        <JobActionBtn jobId={job.id} ownerId={job.userId} />
+          </Link>
+        </div>
       </CardContent>
     </Card>
   );

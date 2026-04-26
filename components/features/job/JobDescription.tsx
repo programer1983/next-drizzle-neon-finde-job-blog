@@ -9,7 +9,9 @@ export default function JobDescription({ job }: JobDescriptionProps) {
     <Card>
       <CardContent>
         <h2 className="mb-4 text-3xl font-semibold">About Role</h2>
-        <p className="text-muted-foreground">{job?.description}</p>
+        <p className="text-muted-foreground leading-[1.5] md:text-[16px] lg:text-[18px]">
+          {job?.description}
+        </p>
       </CardContent>
     </Card>
   );

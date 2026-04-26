@@ -52,8 +52,8 @@ export default function JobActionBtn({
   }
 
   return (
-    <div className="absolute  top-2 right-2">
-      <Button variant={"outline"} asChild className="cursor-pointer mr-2">
+    <div className="flex gap-x-[5px]">
+      <Button variant={"outline"} asChild className="cursor-pointer">
         <Link href={`/jobs/${jobId}/edit`}>
           <Pencil className="w-5 h-5" />
         </Link>

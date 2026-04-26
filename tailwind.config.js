@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "410px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
